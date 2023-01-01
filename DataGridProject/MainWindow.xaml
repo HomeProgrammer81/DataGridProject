@@ -14,6 +14,12 @@
                   SelectionMode="Single"
                   RowHeaderWidth="0"
                   SelectionChanged="DataGrid_FruitsList_SelectionChanged" >
+            <!-- 選択時に_isSelectedの値変更 -->
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                    <Setter Property="IsSelected" Value="{Binding _isSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="名前" Width="100" Binding="{Binding _name}" />
                 <DataGridTextColumn Header="色" Width="50" Binding="{Binding _color}" />

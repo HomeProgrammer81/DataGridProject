@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -29,21 +30,24 @@ namespace DataGridProject
 
         private void DataGrid_FruitsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int idx = DataGrid_FruitsList.SelectedIndex;
-
-            if (idx == -1)
+            // _isSelectedがtrueのものが選択中
+            FriutsModel? model = FriutsList.FirstOrDefault(obj => obj._isSelected);
+            if (model == null)
             {
                 return;
             }
 
-            TextBox_Name.Text = FriutsList[idx]._name;
-            TextBox_Color.Text = FriutsList[idx]._color;
-            TextBox_Price.Text = FriutsList[idx]._price.ToString();
+            TextBox_Name.Text = model._name;
+            TextBox_Color.Text = model._color;
+            TextBox_Price.Text = model._price.ToString();
         }
     }
 
     public class FriutsModel
     {
+        // 選択状態を追加
+        public bool _isSelected { get; set; }
+
         public string _name { get; set; }
 
         public string _color { get; set; }
@@ -52,6 +56,7 @@ namespace DataGridProject
 
         public FriutsModel(string _name, string _color, int _price)
         {
+            _isSelected = false;
             this._name = _name;
             this._color = _color;
             this._price = _price;
