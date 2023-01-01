@@ -13,7 +13,8 @@
                   IsReadOnly="True" 
                   SelectionMode="Single"
                   RowHeaderWidth="0"
-                  SelectionChanged="DataGrid_FruitsList_SelectionChanged" >
+            >
+            <!-- SelectionChanged="DataGrid_FruitsList_SelectionChanged" -->
             <!-- 選択時に_isSelectedの値変更 -->
             <DataGrid.RowStyle>
                 <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource {x:Type DataGridRow}}">
@@ -37,6 +38,17 @@
                             </Style.Triggers>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="Black" />
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="BorderBrush" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Width="50" Binding="{Binding _color}">
                     <DataGridTextColumn.HeaderStyle>
@@ -54,6 +66,17 @@
                             </Style.Triggers>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="Black" />
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="BorderBrush" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Width="50" Binding="{Binding _price}">
                     <DataGridTextColumn.HeaderStyle>
@@ -71,6 +94,17 @@
                             </Style.Triggers>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="Black" />
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="BorderBrush" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
