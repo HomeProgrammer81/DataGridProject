@@ -27,6 +27,14 @@
                             <Setter Property="Content" Value="名前"/>
                             <Setter Property="Background" Value="Blue"/>
                             <Setter Property="Foreground" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="SortDirection" Value="Ascending">
+                                    <Setter Property="Content" Value="名前▼"/>
+                                </Trigger>
+                                <Trigger Property="SortDirection" Value="Descending">
+                                    <Setter Property="Content" Value="名前▲"/>
+                                </Trigger>
+                            </Style.Triggers>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
@@ -36,6 +44,14 @@
                             <Setter Property="Content" Value="色"/>
                             <Setter Property="Background" Value="Blue"/>
                             <Setter Property="Foreground" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="SortDirection" Value="Ascending">
+                                    <Setter Property="Content" Value="色▼"/>
+                                </Trigger>
+                                <Trigger Property="SortDirection" Value="Descending">
+                                    <Setter Property="Content" Value="色▲"/>
+                                </Trigger>
+                            </Style.Triggers>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
@@ -45,6 +61,14 @@
                             <Setter Property="Content" Value="価格"/>
                             <Setter Property="Background" Value="Blue"/>
                             <Setter Property="Foreground" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="SortDirection" Value="Ascending">
+                                    <Setter Property="Content" Value="価格▼"/>
+                                </Trigger>
+                                <Trigger Property="SortDirection" Value="Descending">
+                                    <Setter Property="Content" Value="価格▲"/>
+                                </Trigger>
+                            </Style.Triggers>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
