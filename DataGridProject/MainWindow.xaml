@@ -1,0 +1,31 @@
+﻿<Window x:Class="DataGridProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataGridProject"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="250" Width="500">
+    <Grid >
+        <DataGrid x:Name="DataGrid_FruitsList"
+                  Margin="28,29,250,30"
+                  AutoGenerateColumns = "False"
+                  IsReadOnly="True" 
+                  SelectionMode="Single"
+                  RowHeaderWidth="0"
+                  SelectionChanged="DataGrid_FruitsList_SelectionChanged" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="名前" Width="100" Binding="{Binding _name}" />
+                <DataGridTextColumn Header="色" Width="50" Binding="{Binding _color}" />
+                <DataGridTextColumn Header="価格" Width="50" Binding="{Binding _price}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <GroupBox Margin="273,33,30,55" Header="選択中"/>
+        <TextBlock HorizontalAlignment="Left" Margin="280,56,0,0" TextWrapping="Wrap" Text="名前 : " VerticalAlignment="Top" RenderTransformOrigin="0,-0.937"/>
+        <TextBox x:Name="TextBox_Name" HorizontalAlignment="Left" Margin="325,56,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="280,89,0,0" TextWrapping="Wrap" Text="色 : " VerticalAlignment="Top" RenderTransformOrigin="0.603,2.195"/>
+        <TextBox x:Name="TextBox_Color" HorizontalAlignment="Left" Margin="325,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="280,124,0,0" TextWrapping="Wrap" Text="価格 : " VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBox_Price" HorizontalAlignment="Left" Margin="325,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>
