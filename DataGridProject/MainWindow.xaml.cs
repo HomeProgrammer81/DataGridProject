@@ -41,6 +41,11 @@ namespace DataGridProject
             TextBox_Color.Text = model._color;
             TextBox_Price.Text = model._price.ToString();
         }
+
+        private void Click_EditButton(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     public class FriutsModel

@@ -8,7 +8,7 @@
         Title="MainWindow" Height="250" Width="500">
     <Grid >
         <DataGrid x:Name="DataGrid_FruitsList"
-                  Margin="28,29,250,30"
+                  Margin="10,29,232,30"
                   AutoGenerateColumns = "False"
                   IsReadOnly="True" 
                   SelectionMode="Single"
@@ -106,6 +106,41 @@
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
+                <DataGridTemplateColumn Width="30">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Content" Value="編集"/>
+                            <Setter Property="Background" Value="Blue"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="SortDirection" Value="Ascending">
+                                    <Setter Property="Content" Value="価格▼"/>
+                                </Trigger>
+                                <Trigger Property="SortDirection" Value="Descending">
+                                    <Setter Property="Content" Value="価格▲"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="Black" />
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="BorderBrush" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Background="White" BorderThickness="0" Click="Click_EditButton">
+                                <Image Source="Resources/editbutton.png" Height="15" Width="15"></Image>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <GroupBox Margin="273,33,30,55" Header="選択中"/>
