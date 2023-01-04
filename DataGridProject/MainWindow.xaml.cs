@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using DataGridProject.FriutListDataGrid;
+using DataGridProject.HeaderName;
+using DataGridProject.ViewModel;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,56 +14,46 @@ namespace DataGridProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<FriutsModel> FriutsList = new ObservableCollection<FriutsModel>()
+        private HeaderNames HeaderNames = new HeaderNames(
+            new List<HeaderNameObj>()
+            {
+                new HeaderNameObj("名前", "名前▲", "名前▼", "_name"),
+                new HeaderNameObj("色", "色▲", "色▼", "_color"),
+                new HeaderNameObj("価格", "価格▲", "価格▼", "_price")
+            });
+
+        private List<FriutViewModel> FriutViewModelList = new List<FriutViewModel>()
         {
-            new FriutsModel("りんご", "赤", 148),
-            new FriutsModel("みかん", "オレンジ", 130),
-            new FriutsModel("キウイ", "緑", 136),
-            new FriutsModel("ぶどう", "赤", 540),
-            new FriutsModel("かき", "オレンジ", 120),
-            new FriutsModel("ばなな", "黄", 108),
+            new FriutViewModel("りんご", "赤", 148),
+            new FriutViewModel("みかん", "オレンジ", 130),
+            new FriutViewModel("キウイ", "緑", 136),
+            new FriutViewModel("ぶどう", "赤", 540),
+            new FriutViewModel("かき", "オレンジ", 120),
+            new FriutViewModel("ばなな", "黄", 108),
         };
+
+        private FriutListDataGridDesigner friutListDataGridDesigner;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            DataGrid_FruitsList.ItemsSource = new ObservableCollection<FriutsModel>();
-            DataGrid_FruitsList.ItemsSource = FriutsList;
+            friutListDataGridDesigner = new FriutListDataGridDesigner(Grid_FruitsList, HeaderNames);
+            friutListDataGridDesigner.Draw(FriutViewModelList);
         }
 
-        private void DataGrid_FruitsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// ヘッダーがクリックされたとき呼び出し
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGrid_Sorting(object sender, DataGridSortingEventArgs e)
         {
-            // _isSelectedがtrueのものが選択中
-            FriutsModel? model = FriutsList.FirstOrDefault(obj => obj._isSelected);
-            if (model == null)
-            {
-                return;
-            }
+            e.Handled = true;
 
-            TextBox_Name.Text = model._name;
-            TextBox_Color.Text = model._color;
-            TextBox_Price.Text = model._price.ToString();
-        }
-    }
+            string sortMemberPath = e.Column.SortMemberPath;
 
-    public class FriutsModel
-    {
-        // 選択状態を追加
-        public bool _isSelected { get; set; }
-
-        public string _name { get; set; }
-
-        public string _color { get; set; }
-
-        public int _price { get; set; }
-
-        public FriutsModel(string _name, string _color, int _price)
-        {
-            _isSelected = false;
-            this._name = _name;
-            this._color = _color;
-            this._price = _price;
+            friutListDataGridDesigner.Sort(sortMemberPath);
         }
     }
 }

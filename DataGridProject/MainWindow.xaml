@@ -6,14 +6,18 @@
         xmlns:local="clr-namespace:DataGridProject"
         mc:Ignorable="d"
         Title="MainWindow" Height="250" Width="500">
-    <Grid >
-        <DataGrid x:Name="DataGrid_FruitsList"
-                  Margin="28,29,250,30"
+    <Grid x:Name="Grid_FruitsList">
+        <Grid.Resources>
+            <FrameworkElement x:Key="proxyElement" />
+        </Grid.Resources>
+        <ContentControl Visibility="Collapsed" Content="{StaticResource proxyElement}" />
+        <DataGrid Margin="28,29,250,30"
                   AutoGenerateColumns = "False"
                   IsReadOnly="True" 
                   SelectionMode="Single"
                   RowHeaderWidth="0"
-                  SelectionChanged="DataGrid_FruitsList_SelectionChanged" >
+                  ItemsSource="{Binding Path=_friutsModelList}"
+                  Sorting="DataGrid_Sorting" >
             <!-- 選択時に_isSelectedの値変更 -->
             <DataGrid.RowStyle>
                 <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource {x:Type DataGridRow}}">
@@ -24,51 +28,27 @@
                 <DataGridTextColumn Width="100" Binding="{Binding _name}">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="Content" Value="名前"/>
+                            <Setter Property="Content" Value="{Binding Path=DataContext._nameHeader, Source={StaticResource proxyElement}}"/>
                             <Setter Property="Background" Value="Blue"/>
                             <Setter Property="Foreground" Value="White"/>
-                            <Style.Triggers>
-                                <Trigger Property="SortDirection" Value="Ascending">
-                                    <Setter Property="Content" Value="名前▼"/>
-                                </Trigger>
-                                <Trigger Property="SortDirection" Value="Descending">
-                                    <Setter Property="Content" Value="名前▲"/>
-                                </Trigger>
-                            </Style.Triggers>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Width="50" Binding="{Binding _color}">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="Content" Value="色"/>
+                            <Setter Property="Content" Value="{Binding Path=DataContext._colorHeader, Source={StaticResource proxyElement}}"/>
                             <Setter Property="Background" Value="Blue"/>
                             <Setter Property="Foreground" Value="White"/>
-                            <Style.Triggers>
-                                <Trigger Property="SortDirection" Value="Ascending">
-                                    <Setter Property="Content" Value="色▼"/>
-                                </Trigger>
-                                <Trigger Property="SortDirection" Value="Descending">
-                                    <Setter Property="Content" Value="色▲"/>
-                                </Trigger>
-                            </Style.Triggers>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Width="50" Binding="{Binding _price}">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="Content" Value="価格"/>
+                            <Setter Property="Content" Value="{Binding Path=DataContext._priceHeader, Source={StaticResource proxyElement}}"/>
                             <Setter Property="Background" Value="Blue"/>
                             <Setter Property="Foreground" Value="White"/>
-                            <Style.Triggers>
-                                <Trigger Property="SortDirection" Value="Ascending">
-                                    <Setter Property="Content" Value="価格▼"/>
-                                </Trigger>
-                                <Trigger Property="SortDirection" Value="Descending">
-                                    <Setter Property="Content" Value="価格▲"/>
-                                </Trigger>
-                            </Style.Triggers>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
