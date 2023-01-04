@@ -1,54 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
 
 namespace DataGridProject.HeaderName
 {
+    /// <summary>
+    /// ヘッダー名一覧
+    /// </summary>
     internal class HeaderNames
     {
+        /// <summary>
+        /// 一覧
+        /// </summary>
         private readonly List<HeaderNameObj> list;
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="list">一覧</param>
         public HeaderNames(List<HeaderNameObj> list)
         {
             this.list = list;
         }
 
-        public string SearchNormalName(string headerPropertyName)
+        /// <summary>
+        /// ヘッダー名を取得する
+        /// </summary>
+        /// <param name="sortMemberPath">ソートメンバーパス</param>
+        /// <returns>ヘッダー名</returns>
+        public HeaderNameObj? GetHeaderName( string sortMemberPath )
         {
-            HeaderNameObj? headerName = list.FirstOrDefault(headerName => headerName.EqualHeaderPropertyName(headerPropertyName));
-            if(headerName == null)
-            {
-                throw new Exception("プロパティ名が不正です");
-            }
-            return headerName.normalName;
+            return list.FirstOrDefault(headerName => headerName.EqualSortMemberPath(sortMemberPath));
         }
 
-        public string SearchAscendingName(string headerPropertyName)
+        /// <summary>
+        /// ループする
+        /// </summary>
+        /// <param name="func"></param>
+        public void Loop( Action<HeaderNameObj> func)
         {
-            HeaderNameObj? headerName = list.FirstOrDefault(headerName => headerName.EqualHeaderPropertyName(headerPropertyName));
-            if (headerName == null)
+            foreach ( var headerName in list)
             {
-                throw new Exception("プロパティ名が不正です");
+                func(headerName);
             }
-            return headerName.ascendingName;
-        }
-
-        public string SearchDescendingName(string headerPropertyName)
-        {
-            HeaderNameObj? headerName = list.FirstOrDefault(headerName => headerName.EqualHeaderPropertyName(headerPropertyName));
-            if (headerName == null)
-            {
-                throw new Exception("プロパティ名が不正です");
-            }
-            return headerName.descendingName;
-        }
-
-        public bool ExistPropertyName(string headerPropertyName)
-        {
-            return list.Any(headerName => headerName.EqualHeaderPropertyName(headerPropertyName));
         }
     }
 }
